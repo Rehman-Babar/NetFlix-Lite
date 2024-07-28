@@ -1,9 +1,21 @@
+import { Route, Routes } from "react-router-dom"
+
+import SignUpPage from "./pages/SignUpPage"
+import LoginPage from "./pages/LoginPage"
+import HomePage from "./pages/HomePage"
+
+
 function App() {
 
   return (
-    <h1 className="text-3xl font-bold underline text-blue-500">
-    Hello world!
-  </h1>
+    <>
+    <Routes>
+      <Route path="/" element={<HomePage/>}/>
+      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/signup" element={<SignUpPage/>}/>
+      {/* <Route path="/" element={<HomePage/>}/> */}
+    </Routes>
+    </>
   )
 }
 
