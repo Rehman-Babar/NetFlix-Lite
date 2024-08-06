@@ -1,47 +1,18 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useAuthStore } from "../store/authUser";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const queryClient = useQueryClient();
-  const { mutate: login, isPending } = useMutation({
-    mutationFn: async () => {
-      try {
-        const res = await fetch('/api/v1/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password })
-        });
-
-        if (!res.ok) {
-          const data = await res.json();
-          throw new Error(data.error);
-        }
-        const data = await res.json();
-        console.log(data);
-        return data;
-      } catch (error) {
-        console.log(error);
-        throw error;
-      }
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["authUser"] });
-    }
-  });
-
+ 
+  const { login, isLoggingIn } = useAuthStore();
+  
   const handleLogin = (e) => {
     e.preventDefault();
-    login();
+    login({email, password});
   };
 
   return (
@@ -84,7 +55,7 @@ const LoginPage = () => {
               onClick={handleLogin} 
               className="w-full bg-red-600 text-white font-semibold p-2 hover:bg-red-700 rounded-md"
             >
-              {isPending ? "Loading..." : "Sign In"}
+              {isLoggingIn ? "Loading..." : "Sign In"}
             </button>
           </form>
           <div className="text-gray-600 text-center">

@@ -3,7 +3,8 @@ import { fetchFromTMDB } from "../services/tmbd.services.js"
 export const getTrendingTvShows = async (req, res) => {
     try {
         const data = await fetchFromTMDB('https://api.themoviedb.org/3/trending/tv/day?language=en-US')
-        res.status(200).json({content:data.results})
+        const randomTVShow = data.results[Math.floor(Math.random() * data.results?.length)]
+        res.status(200).json({content:randomTVShow})
     } catch (error) {
         console.log("error in getTrendingTvShows controller", error)
         if (error.message.includes(404)) {

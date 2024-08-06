@@ -1,49 +1,20 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import toast from 'react-hot-toast'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useAuthStore } from "../store/authUser"
 
 const SignUpPage = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailFromUrl = new URLSearchParams(window.location.search).get("email");
   
-  const queryClient = useQueryClient();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState( emailFromUrl || "");
+  const [password, setPassword] = useState("");
 
-  const { mutate:signup, isPending } = useMutation({
-    mutationFn: async () => {
-      const res = await fetch('/api/v1/auth/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          email,
-          password,
-        })
-      });
+const {signup, isSigningUp} = useAuthStore()
 
-      if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error);
-      }
-
-      const data = await res.json();
-      toast.success("Account created successfully");
-      return data;
-    },
-    onError: (error) => {
-      toast.error(error.message);
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["authUser"] });
-    }
-  });
 
   const handleSignup = (e) => {
     e.preventDefault();
-    signup();
+    signup({username, email, password});
   }
 
   return (
@@ -102,7 +73,7 @@ const SignUpPage = () => {
               type="submit"
               className="w-full bg-red-600 text-white font-semibold p-2 hover:bg-red-700 rounded-md"
             >
-              {isPending ? "Loading..." : "Sign Up"}
+              {isSigningUp ? "Loading..." : "Sign Up"}
             </button>
           </form>
           <div className="text-gray-600 text-center">

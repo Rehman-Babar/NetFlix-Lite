@@ -27,7 +27,7 @@ app.use(cookieParser())
 
 app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/movie',protectedRoutes, movieRoutes)
-app.use('/api/v1/tv-seasons',protectedRoutes, tvSeasonRoutes)
+app.use('/api/v1/tv',protectedRoutes, tvSeasonRoutes)
 app.use('/api/v2/search',protectedRoutes, searchRoutes)
 
 app.listen(port, () => {

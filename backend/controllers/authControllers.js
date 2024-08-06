@@ -43,7 +43,7 @@ export const Signup = async (req, res) => {
         if (newUser) {
             jwttokenAndSetCookie(newUser._id, res);
             await newUser.save();
-            return res.status(201).json({success:true, newUser:{
+            return res.status(201).json({success:true, user:{
                 ...newUser._doc,
                 password:""
             }});
@@ -101,9 +101,10 @@ export const GetMe = async(req, res) => {
         if (!user) {
             res.status(404).json({error:"User not found"})
         }
-        res.status(200).json(user)
+        res.status(200).json({user:user})
     } catch (error) {
         console.log("error in GetMe controller:", error.message);
         res.status(500).json({error:"Internal Server Error"})
     }
 }
+

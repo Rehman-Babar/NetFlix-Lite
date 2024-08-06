@@ -5,7 +5,10 @@ export const protectedRoutes = async (req, res, next) => {
     try {
         // Get the token from the headers
 
-        const token = req.cookies["jwtNetflix"]
+        const token = req.cookies.jwtNetflix;
+        if (!token) {
+            return res.status(401).json({ message: 'Access token is missing or invalid' });
+        }
         // Verify the token
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         if (!decoded) {
