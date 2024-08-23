@@ -6,7 +6,7 @@ import { SMALL_BASE_URL_iMAGE } from '../../utils/constens'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 const MovieSlider = ({category}) => {
-
+console.log("category", category)
   const [showArrow, setShowArrow] = useState(false)
 
   const sliderRef = useRef(null)
@@ -25,7 +25,7 @@ const MovieSlider = ({category}) => {
 
   const {contentType} = contentStore()
 
-  const formateCatogery = category.replaceAll("_", " ")[0].toUpperCase() + category.replaceAll("_", " ").slice(1)
+  const formateCatogery = category.replaceAll("_", " ")[0].toUpperCase() + category.replaceAll("_", " ").slice(1);
   const formateContent = contentType === "movie" ? "Movies" : "Tv Shows"
   const [content, setContent] = useState([])
 

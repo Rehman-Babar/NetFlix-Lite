@@ -18,7 +18,7 @@ export const getTVTrailer = async (req, res) => {
     const {id} = req.params;
     try {
         const data = await fetchFromTMDB(`https://api.themoviedb.org/3/tv/${id}/videos?language=en-US`)
-        res.status(200).json({content:data.results})
+        res.status(200).json({trailer:data.results})
     } catch (error) {
         console.log("error in GetTVTrailer controller", error)
         if (error.message.includes(404)) {
@@ -46,7 +46,7 @@ export const GetSimmilerTVShows = async (req, res) => {
     const {id} = req.params;
     try {
         const data = await fetchFromTMDB(`https://api.themoviedb.org/3/tv/${id}/similar?language=en-US&page=1`)
-        res.status(200).json({content:data.results})
+        res.status(200).json({simmiler:data.results})
         } catch (error) {
             console.log("error in GetSimmilerTVShows controller", error)
             if (error.message.includes(404)) {

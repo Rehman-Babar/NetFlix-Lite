@@ -45,10 +45,10 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className='mt-4 border border-gray-800 z-50 w-full sm:hidden'>
           <Link to={'/'} onClick={Toggler} className='block p-2 hover:underline' >
-          Movies
+          <div onClick={() => setContentType("movie")}>Movie</div>
           </Link>
           <Link to={'/'} onClick={Toggler} className='block p-2 hover:underline' >
-          TV Shows
+          <div onClick={() => setContentType("tv")}>TV Shows</div>
           </Link>
           <Link to={'/history'} onClick={Toggler} className='block p-2 hover:underline' >
           Search History

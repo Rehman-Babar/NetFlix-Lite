@@ -4,7 +4,7 @@ import { useAuthStore } from "../../store/authUser";
 import Navbar from "../../component/common/Navbar";
 import { Info,  Play } from "lucide-react";
 import useGetTrandingContent from "../../hooks/useGetTrandingContent";
-import { MOVIE_CATOGREY, SMALL_BASE_URL_iMAGE, TV_CATOGREY } from "../../utils/constens";
+import { MOVIE_CATOGREY, SMALL_BASE_URL_iMAGE, TV_CATOGREY } from "../../utils/constens.js";
 import { contentStore } from "../../store/content";
 import MovieSlider from "../../component/slider/MovieSlider";
 import { useState } from "react";

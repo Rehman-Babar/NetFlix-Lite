@@ -4,7 +4,7 @@ import { GetSimmilerTVShows, getTrendingTvShows, getTVShowsCategory, getTvShowsD
 const router = express.Router();
 
 router.get('/trending', getTrendingTvShows)
-router.get('/:id/trailer', getTVTrailer)
+router.get('/:id/trailers', getTVTrailer)
 router.get('/:id/details', getTvShowsDetails)
 router.get('/:id/simmiler', GetSimmilerTVShows)
 router.get('/:category', getTVShowsCategory)

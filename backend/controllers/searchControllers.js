@@ -15,7 +15,7 @@ export const SearchMovies = async (req, res) => {
                     id:data.results[0].id,
                     image:data.results[0].poster_path,
                     title:data.results[0].title,
-                    searchType:"Movie",
+                    searchType:"movie",
                     createdAt:new Date()
                 }
             }
@@ -43,7 +43,7 @@ export const  SearchPerson = async (req, res) => {
                     id:data.results[0].id,
                     image:data.results[0].profile_path,
                     title:data.results[0].name,
-                    searchType:"Person",
+                    searchType:"person",
                     createdAt:new Date()
                 }
             }
@@ -73,7 +73,7 @@ export const SearchTV = async (req, res) => {
                     id:data.results[0].id,
                     image:data.results[0].poster_path,
                     title:data.results[0].name,
-                    searchType:"Tv-Show",
+                    searchType:"tv",
                     createdAt:new Date()
                 }
             }
