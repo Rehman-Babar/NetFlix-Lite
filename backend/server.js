@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv'
+import path from 'path'
 
 import MongoDbConnection from './db/mongoDbConnection.js';
 
@@ -15,6 +16,8 @@ const port = process.env.PORT || 5000
 
 const app = express();
 
+const __dirname = path.resolve()
+
 dotenv.config();
 
 
@@ -29,6 +32,14 @@ app.use('/api/v1/auth', authRoutes)
 app.use('/api/v1/movie',protectedRoutes, movieRoutes)
 app.use('/api/v1/tv',protectedRoutes, tvSeasonRoutes)
 app.use('/api/v2/search',protectedRoutes, searchRoutes)
+
+// if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'frontend/dist')))
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
+    })
+    
+// }
 
 app.listen(port, () => {
     console.log(`http://localhost:${port}`);

@@ -67,6 +67,8 @@ export const SearchTV = async (req, res) => {
         if (data.results.length === 0) {
             return res.status(404).send(null)
         }
+        // const user = await findById(req.user._id)
+        // console.log("user", user)
         await User.findByIdAndUpdate(req.user._id, {
             $push:{
                 searchHistory:{
